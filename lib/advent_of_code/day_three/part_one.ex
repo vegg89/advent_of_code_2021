@@ -14,6 +14,7 @@ defmodule AdventOfCode.DayThree.PartOne do
     {gamma, epsilon} =
       group_bits(%{}, binaries)
       |> get_binary()
+
     {gamma, _} = Integer.parse(gamma, 2)
     {epsilon, _} = Integer.parse(epsilon, 2)
     gamma * epsilon
@@ -28,15 +29,15 @@ defmodule AdventOfCode.DayThree.PartOne do
   end
 
   defp add_diagnostic(bits, bit_counts) do
-    Enum.reduce(bits, {0, bit_counts}, fn(bit, {index, count}) ->
+    Enum.reduce(bits, {0, bit_counts}, fn bit, {index, count} ->
       {zeroes, ones} = count[index] || {0, 0}
-      postion_bits= if bit == "0", do: {zeroes + 1, ones}, else: {zeroes, ones + 1}
+      postion_bits = if bit == "0", do: {zeroes + 1, ones}, else: {zeroes, ones + 1}
       {index + 1, Map.put(count, index, postion_bits)}
     end)
   end
 
   defp get_binary(grouped_bits) do
-    Enum.reduce(grouped_bits, {"", ""}, fn({_, {zeroes, ones}}, {gamma, epsilon}) ->
+    Enum.reduce(grouped_bits, {"", ""}, fn {_, {zeroes, ones}}, {gamma, epsilon} ->
       if zeroes > ones do
         {gamma <> "0", epsilon <> "1"}
       else

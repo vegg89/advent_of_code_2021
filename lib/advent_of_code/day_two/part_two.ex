@@ -19,7 +19,7 @@ defmodule AdventOfCode.DayTwo.PartTwo do
 
   defp calculate_position({horizontal, depth, aim}, ["forward " <> units | left_movements]) do
     units = String.to_integer(units)
-    calculate_position({horizontal + units, depth + (aim * units), aim}, left_movements)
+    calculate_position({horizontal + units, depth + aim * units, aim}, left_movements)
   end
 
   defp calculate_position({horizontal, depth, aim}, ["down " <> units | left_movements]) do
